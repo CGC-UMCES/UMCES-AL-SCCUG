@@ -1,4 +1,4 @@
-# Data Transfer Workshop: rsync, scp, rclone (+ GNU Parallel & R)
+# Data Transfer Tutorial: rsync, scp, rclone (+ GNU Parallel & R)
 
 > Goal: practice fast, reliable file transfers from your **local workstation** to the **SCC server** over SSH.  
 > You’ll learn when to use each tool, common flags, and how to run them from **R**.
@@ -8,14 +8,14 @@
 ## 0) Setup & Lab Conventions
 
 **You’ll need:**
-- An SCC account with SSH access: `user@server.al.umces.edu`
-- A local folder with sample files: `~/data/demo/`
-- A destination folder on the server: `/project/user/demo/` (create it or ask an admin)
+- An SCC account with SSH access: `user@user-01.al.umces.edu`
+- A local folder with sample files: `~/SCCUG/demo/`
+- A destination folder on the server: `/SCCUG/test/` (create it or ask an admin)
 
 **Variables (edit for your setup):**
 ```bash
-LOCAL=~/data/demo
-REMOTE=user@server.al.umces.edu:/project/user/demo
+LOCAL=~/SCCUG/demo
+REMOTE=user@user-01.al.umces.edu:/SCCUG/test
 REMOTE_HOST=user@server.al.umces.edu
 ```
 
@@ -164,6 +164,11 @@ find "$LOCAL" -type f -name "*.tif" > filelist.txt
 # Push 4 files at a time
 cat filelist.txt | parallel -j 4 rsync -av --partial --inplace --progress {} "$REMOTE"/
 ```
+- `a` → archive mode = preserve symlinks, permissions, timestamps, group, owner, etc. (basically "copy as-is").
+- `v` → verbose = print what’s happening.
+- `--partial` → keep partially transferred files if interrupted, so they can be resumed instead of restarting.
+- `--inplace` → write changes directly into the destination file instead of creating a temp file. Makes resuming more efficient for big files.
+- `--progress` → show per-file transfer progress (bytes sent, % complete, speed, ETA).
 - `-j 4` → run 4 transfers concurrently (tune based on bandwidth/disk)  
 - `{}` placeholder becomes each file path
 
@@ -185,8 +190,8 @@ You can run any shell command from R with `system()` or `system2()`.
 
 **rsync from R**
 ```r
-local  <- "/home/you/data/demo"
-remote <- "user@server.al.umces.edu:/project/user/demo"
+local  <- "~/SCCUG/demo"
+remote <- "user@user-01.al.umces.edu:/SCCUG/test"
 
 cmd <- sprintf('rsync -av --partial --inplace --progress "%s"/ "%s"/', local, remote)
 status <- system(cmd)
@@ -226,7 +231,7 @@ rsync -av --progress "$LOCAL"/ "$REMOTE"/
 
 ### Step B — Exclude junk & resume
 ```bash
-rsync -av --exclude=".DS_Store" --exclude="*.tmp"       --partial --inplace --progress "$LOCAL"/ "$REMOTE"/
+rsync -av --exclude=".DS_Store" --exclude="*.tmp" --partial --inplace --progress "$LOCAL"/ "$REMOTE"/
 ```
 
 ### Step C — Mirror (delete extras on server)
