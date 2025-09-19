@@ -17,9 +17,10 @@ Download Station is a built-in application on the **SCC-SAN** device that lets y
 ## How to Access
 1. Open a browser and go to:  
    👉 [https://scc-san.al.umces.edu:5001](https://scc-san.al.umces.edu:5001)
-2. Login using your **SCC credentials**.  
+2. Login using your **SCC credentials**.   
 
 ## Next Steps
-- Once logged in, explore the **Download Station interface** to set up new downloads.  
+- Once logged in, navigate to the **Main Menu** in the upper left hand corner of the screen and launch the **Download Station** application.
+- Explore the **Download Station interface** to set up new downloads.  
 - You can configure sources (e.g., FTP, HTTP, SFTP, torrents) and schedule downloads.  
-- Files will appear in your **SCC home directory** once complete.  
+- Files will appear in your chosen SCC directory folder once complete.  
