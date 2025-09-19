@@ -41,7 +41,28 @@ REMOTE_HOST=user@server.al.umces.edu
 
 ---
 
-## 2) rsync (the workhorse)
+## 2) scp (simple copies)
+
+**Copy a whole directory (recursive)**
+```bash
+scp -r "$LOCAL" "$REMOTE"
+```
+
+**Copy a single file**
+```bash
+scp "$LOCAL/file.tif" "$REMOTE"
+```
+
+**Show progress**
+```bash
+scp -v -r "$LOCAL" "$REMOTE"
+```
+
+> scp is great for small, one-off jobs. For **incremental updates** or resuming partially copied big files, prefer **rsync**.
+
+---
+
+## 3) rsync (the workhorse)
 
 **Basic push (local → server)**
 ```bash
@@ -87,65 +108,124 @@ rsync -avz "$LOCAL"/ "$REMOTE"/
 
 ---
 
-## 3) scp (simple copies)
-
-**Copy a whole directory (recursive)**
-```bash
-scp -r "$LOCAL" "$REMOTE"
-```
-
-**Copy a single file**
-```bash
-scp "$LOCAL/file.tif" "$REMOTE"
-```
-
-**Show progress**
-```bash
-scp -v -r "$LOCAL" "$REMOTE"
-```
-
-> scp is great for small, one-off jobs. For **incremental updates** or resuming partially copied big files, prefer **rsync**.
-
----
-
 ## 4) rclone (SSH & clouds, parallel by default)
 
-**Install:** <https://rclone.org/install/>
+[`rclone`](https://rclone.org/) is a versatile command-line tool for transferring files.  
+It can copy data between your **local machine**, the **UMCES SCC (via SSH/SFTP)**,  
+and cloud storage services like **Google Drive** — all with a consistent syntax.
 
-**Configure a remote (SSH over SFTP)**
+---
+
+### Install rclone
+
+See full instructions: <https://rclone.org/install/>
+
+Linux/macOS:
+```bash
+curl https://rclone.org/install.sh | sudo bash
+```
+
+Windows: Download from the site or install via **WSL**.
+
+---
+
+### Configure remotes
+
+Run:
 ```bash
 rclone config
-# n) New remote -> name: scc
-# Storage: sftp
-# host: server.al.umces.edu
-# user: user
-# auth: ssh agent / key file as appropriate
 ```
 
-**Copy local → SCC (SFTP via rclone)**
-```bash
-rclone copy "$LOCAL" scc:/project/user/demo -P --transfers=8 --checkers=16
+### SCC via SFTP
 ```
-- `-P` progress bar  
-- `--transfers` concurrent file transfers  
-- `--checkers` concurrent listings/checks
-
-**Sync (mirror)**
-```bash
-rclone sync "$LOCAL" scc:/project/user/demo -P --delete-excluded
+n) New remote
+name: scc
+storage: sftp
+host: server.al.umces.edu
+user: yourusername
+auth: ssh agent / key file
 ```
-> ⚠️ Like rsync’s `--delete`, this will make destination match source (deletes extras).
 
-**Cloud examples** (after `rclone config`):
+### Google Drive
+```
+n) New remote
+name: gdrive
+storage: drive
+scope: drive
+auto config: y
+```
+This will open a browser for Google login and authorization.
+
+After setup you’ll have two remotes available: `scc:` and `gdrive:`.
+
+---
+
+### Examples
+
+### Copy local → SCC
 ```bash
-# To S3:
-rclone copy "$LOCAL" s3:mybucket/path -P
+rclone copy ~/data scc:/project/user/data -P --transfers=8 --checkers=16
+```
 
-# To Google Drive:
-rclone copy "$LOCAL" gdrive:my-folder -P
+### Copy local → Google Drive
+```bash
+rclone copy ~/data gdrive:my-folder -P
 ```
 
 ---
+
+### Direct transfers between SCC and Google Drive
+
+One of the most powerful features of rclone is **remote-to-remote transfers**.  
+You can move data between SCC and Google Drive directly, without downloading to your laptop.
+
+### Google Drive → SCC
+```bash
+# Copy folder from Google Drive to SCC
+rclone copy gdrive:my-folder scc:/project/user/my-folder -P --transfers=8 --checkers=16
+```
+
+### SCC → Google Drive
+```bash
+# Copy results from SCC back to Google Drive
+rclone copy scc:/project/user/results gdrive:backup-results -P
+```
+
+### Sync (mirror source to destination)
+```bash
+# WARNING: this will delete files on the destination that don’t exist in the source
+rclone sync gdrive:project-data scc:/project/user/project-data -P
+```
+
+---
+
+### Other useful commands
+
+- **List files in Google Drive**
+  ```bash
+  rclone ls gdrive:
+  ```
+
+- **List files on SCC**
+  ```bash
+  rclone ls scc:/project/user/
+  ```
+
+---
+
+### Notes
+- `-P` → shows progress bar  
+- `--transfers=N` → number of parallel file transfers  
+- `--checkers=N` → number of parallel directory listings/checks  
+- Use `copy` to leave destination files alone, `sync` to enforce exact mirror
+
+---
+
+✅ With `rclone`, you can:
+- Move datasets **directly** between SCC and Google Drive  
+- Avoid slow laptop downloads  
+- Use the same simple commands for SSH servers, S3, Dropbox, and more 
+
 
 ## 5) Speeding up batches with GNU Parallel
 
