@@ -6,7 +6,13 @@ Download Station is a built-in application on the **SCC-SAN** device that lets y
 ## Why use it?
 - Avoid slow downloads through your laptop/desktop  
 - Pull data directly into SCC storage  
-- Automate bulk or scheduled downloads  
+- Automate bulk or scheduled downloads
+- Easy graphical user interface for setup and monitoring downloads
+  
+## Why avoid it?
+- Cumbersome if not downloading large or numerous files
+- Limited to 50 URLs per batch, reducing utility and efficiency when loading 100s of URLS
+- Best suited for a relatively narrow set of use cases (e.g., tens to hundreds of files, or particularly large datasets)
 
 ## How to Access
 1. Open a browser and go to:  
