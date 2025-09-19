@@ -1,0 +1,10 @@
+https://rockyweb.usgs.gov/vdelivery/Datasets/Staged/Elevation/LPC/Projects/MD_Western_2021_D21/MD_Western_1_D21/LAZ/USGS_LPC_MD_Western_2021_D21_17spd185830.laz
+https://rockyweb.usgs.gov/vdelivery/Datasets/Staged/Elevation/LPC/Projects/MD_Western_2021_D21/MD_Western_1_D21/LAZ/USGS_LPC_MD_Western_2021_D21_17spd575860.laz
+https://rockyweb.usgs.gov/vdelivery/Datasets/Staged/Elevation/LPC/Projects/MD_Western_2021_D21/MD_Western_1_D21/LAZ/USGS_LPC_MD_Western_2021_D21_17spd470680.laz
+https://rockyweb.usgs.gov/vdelivery/Datasets/Staged/Elevation/LPC/Projects/MD_Western_2021_D21/MD_Western_1_D21/LAZ/USGS_LPC_MD_Western_2021_D21_17spd155830.laz
+https://rockyweb.usgs.gov/vdelivery/Datasets/Staged/Elevation/LPC/Projects/MD_Western_2021_D21/MD_Western_1_D21/LAZ/USGS_LPC_MD_Western_2021_D21_17sod945815.laz
+https://rockyweb.usgs.gov/vdelivery/Datasets/Staged/Elevation/LPC/Projects/MD_Western_2021_D21/MD_Western_1_D21/LAZ/USGS_LPC_MD_Western_2021_D21_17spd545965.laz
+https://rockyweb.usgs.gov/vdelivery/Datasets/Staged/Elevation/LPC/Projects/MD_Western_2021_D21/MD_Western_1_D21/LAZ/USGS_LPC_MD_Western_2021_D21_17sod735845.laz
+https://rockyweb.usgs.gov/vdelivery/Datasets/Staged/Elevation/LPC/Projects/MD_Western_2021_D21/MD_Western_1_D21/LAZ/USGS_LPC_MD_Western_2021_D21_17spd065890.laz
+https://rockyweb.usgs.gov/vdelivery/Datasets/Staged/Elevation/LPC/Projects/MD_Western_2021_D21/MD_Western_1_D21/LAZ/USGS_LPC_MD_Western_2021_D21_17spd095815.laz
+https://rockyweb.usgs.gov/vdelivery/Datasets/Staged/Elevation/LPC/Projects/MD_Western_2021_D21/MD_Western_1_D21/LAZ/USGS_LPC_MD_Western_2021_D21_17spd185950.laz
