@@ -21,16 +21,15 @@ runs. It is designed for command-line users working with large research datasets
 
 ### Install
 - **Ubuntu/Debian:** `sudo apt update && sudo apt install -y wget parallel`
-- **Fedora/RHEL:** `sudo dnf install wget parallel`
 - **macOS (Homebrew):** `brew install wget parallel`
-- **Windows:** use **WSL** (Ubuntu) or MSYS2 (then `pacman -S wget parallel`).
+- **Windows:** use **WSL** (Ubuntu) (wsl --install in Powershell).
 
 ### Conventions used below
 ```bash
 # Edit these for your system
-OUTDIR=~/downloads              # where files will be saved
-URLS=~/urls.txt                 # a file containing one URL per line
-JOBS=8                          # number of parallel downloads
+OUTDIR=~/SCCUG                              # where files will be saved
+URLS=~/SCCUG/wget_lidar_tutorial_urls.txt       # a file containing one URL per line
+JOBS=8                                          # number of parallel downloads
 ```
 
 ---
@@ -112,7 +111,7 @@ wget -c -i "$URLS" -P "$OUTDIR" --timeout=30 --tries=15 --retry-connrefused --sh
 
 ---
 
-## 4) Parallelizing with GNU Parallel
+## 4) Parallelizing with GNU Parallel 
 
 ### 4.1 From a URL list
 ```bash
@@ -146,10 +145,10 @@ time wget -c --show-progress -P "$OUTDIR/seq" -i "$URLS"
 
 ### Parallel
 ```bash
-mkdir -p "$OUTDIR/par"
+# It will make the folder if it doesn't exist
 time cat "$URLS" | parallel -j "$JOBS" wget -c --show-progress -P "$OUTDIR/par" {}
 
-# Same and cleaner way to write the same thing
+# Cleaner way to write the same thing with ::::
 time parallel -j "$JOBS" wget -c --show-progress -P "$OUTDIR/par" {} :::: "$URLS"
 ```
 
