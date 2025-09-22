@@ -27,7 +27,7 @@ runs. It is designed for command-line users working with large research datasets
 ### Conventions used below
 ```bash
 # Edit these for your system
-OUTDIR=~/SCCUG                              # where files will be saved
+OUTDIR=~/SCCUG                                  # where files will be saved
 URLS=~/SCCUG/wget_lidar_tutorial_urls.txt       # a file containing one URL per line
 JOBS=8                                          # number of parallel downloads
 ```
