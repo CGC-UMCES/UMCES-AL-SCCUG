@@ -16,7 +16,6 @@
 ```bash
 LOCAL=~/SCCUG/demo
 REMOTE=user@user-01.al.umces.edu:/SCCUG/test
-REMOTE_HOST=user@server.al.umces.edu
 ```
 
 **Safety tips**
