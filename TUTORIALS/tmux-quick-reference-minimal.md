@@ -5,6 +5,22 @@ tmux = **terminal multiplexer** — lets you split your terminal, keep sessions 
 > Default prefix = **`Ctrl+b`** (written as `C-b`).  
 > Press prefix, release, then the following key(s).
 
+
+---
+## Install & Start (likely already installed but in case it is not)
+
+```bash
+# macOS (Homebrew)
+brew install tmux
+
+# Ubuntu/Debian (SCC is Ubuntu)
+sudo apt-get update && sudo apt-get install -y tmux
+
+# Windows
+# Best to install Windows Subsystem for Linux (WSL)
+
+```
+
 ---
 
 ## 🚀 Start & Manage Sessions
